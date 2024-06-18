@@ -7,5 +7,6 @@ Do not use without permission from machine's owner.
 
 ## How to run
 `python3 keylogger.py`
+
 <br>
-Exit from program and find log of keystrokes in keystrokes.log
+Exit from program to find log of keystrokes in keystrokes.log
