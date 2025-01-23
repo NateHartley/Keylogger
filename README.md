@@ -1,5 +1,7 @@
-Simple Python Keylogger, captures keystrokes on targetted machine. <br>
-Do not use without permission from machine's owner.
+Simple Python Keylogger, captures keystrokes on targeted machine. <br>
+
+> [!CAUTION]
+> This is malware. Do not use without permission from machine's owner.
 
 ## Setup
 `pip3 install keyboard`
