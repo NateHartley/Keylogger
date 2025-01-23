@@ -10,4 +10,4 @@ Simple Python Keylogger, captures keystrokes on targeted machine. <br>
 `python3 keylogger.py`
 
 <br>
-Exit from program and find log of keystrokes in keystrokes.log
+Exit from program to find log of keystrokes in keystrokes.log
