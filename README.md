@@ -5,24 +5,34 @@ Keylogger - captures user's keystrokes on a targeted machine. <br>
 
 ---
 
-### Setup and run
-`pip3 install keyboard`<br>
-`python3 keylogger.py`
+### Setup and basic run
+```
+pip3 install keyboard
+pip3 install cryptography
+
+python3 keylogger.py
+```
 
 ---
 
 ### Parsing arguments
 `-h` Help option<br>
-`-k` Optional - Key used to encrypt/decrypt captured keystrokes log file<br>
+`-f` Optional - Writes each captured keystroke on new line, else it is all written all on one line<br>
 `-t` Optional - Number of seconds the keylogger will run for<br>
-`-f` Optional - Writes each captured keystroke on new line, else it is all written all on one line
+`-e [key]` Optional - Key used to encrypt log file contents<br>
+`-d [key]` Optional - Key used to decrypt log file contents<br>
 
 #### Examples
-`python3 keylogger.py -h`<br>
-`python3 keylogger.py -k secret_key -t 100`<br>
-`python3 keylogger.py -k secret_key -t 100 -f`
+```
+python3 keylogger.py -h
+
+python3 keylogger.py -e secret_key -t 100 -f
+
+python3 keylogger.py -d secret_key
+```
+*Please note when decrypting, only the `-d` flag should be parsed.*
 
 ---
 
 <br>
-Exit program to find captured keystrokes in .keystrokes.log
+Exit program to find captured keystrokes in .process.log
