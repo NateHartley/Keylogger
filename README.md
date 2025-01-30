@@ -34,6 +34,5 @@ python3 keylogger.py -d secret_key
 
 ---
 
-<br>
 Program can be exited by pressing the `#` key, or by waiting for the inputted timer to run out.<br>
 Captured keystrokes can be found in .process.log
