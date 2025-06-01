@@ -1,4 +1,4 @@
-Keylogger - captures user's keystrokes on a targeted machine. <br>
+### Keylogger - captures user's keystrokes on a targeted machine. <br>
 
 > [!CAUTION]
 > This is malware. Do not use without permission from machine's owner.
@@ -30,7 +30,8 @@ python3 keylogger.py -e secret_key -t 100 -f
 
 python3 keylogger.py -d secret_key
 ```
-*Please note when decrypting, only the `-d` flag should be parsed.*
+> [!IMPORTANT]  
+> When decrypting, only the `-d` flag should be parsed.
 
 ---
 
